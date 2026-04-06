@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Nguyễn Thảo Linh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #f8dae9;
+      --blue: #b9d6f3;
+      --white: rgba(255, 255, 255, 0.72);
+      --text: #243447;
+      --muted: #66788a;
+      --shadow: 0 18px 45px rgba(59, 89, 152, 0.12);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Be Vietnam Pro", sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--pink) 0%, #f6dfeb 42%, var(--blue) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+      border: none;
+      cursor: pointer;
+      background: none;
+    }
+
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(70px);
+      z-index: 0;
+      opacity: 0.7;
+      animation: float 9s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 260px;
+      height: 260px;
+      background: rgba(255, 255, 255, 0.55);
+      top: 100px;
+      left: -50px;
+    }
+
+    .orb-2 {
+      width: 360px;
+      height: 360px;
+      background: rgba(248, 218, 233, 0.7);
+      top: 120px;
+      right: 20px;
+      animation-delay: 1s;
+    }
+
+    .orb-3 {
+      width: 320px;
+      height: 320px;
+      background: rgba(185, 214, 243, 0.65);
+      bottom: -60px;
+      left: 28%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-18px) translateX(14px); }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 18px 0 40px;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 14px;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.38);
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      border-radius: 999px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.9);
+    }
+
+    .brand h1 {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links button,
+    .mobile-links button {
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.66);
+      color: var(--text);
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .nav-links button:hover,
+    .mobile-links button:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.9);
+    }
+
+    .nav-links button.active,
+    .mobile-links button.active {
+      background: #25313d;
+      color: white;
+      box-shadow: 0 12px 24px rgba(37, 49, 61, 0.18);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.76);
+      font-size: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-menu {
+      display: none;
+      margin-bottom: 18px;
+      padding: 14px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.48);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.38);
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .section {
+      display: none;
+      animation: fadeUp 0.5s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .grid-hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(255,255,255,0.38);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .hero-card {
+      min-height: 100%;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.75);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .hero-text,
+    .desc,
+    .quote-text,
+    .contact-text {
+      line-height: 1.9;
+      color: #46596d;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.25s ease;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    }
+
+    .btn-dark {
+      background: #25313d;
+      color: white;
+    }
+
+    .btn-light {
+      background: rgba(255,255,255,0.88);
+      color: var(--text);
+    }
+
+    .btn-pink {
+      background: var(--pink);
+      color: var(--text);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.82);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+    }
+
+    .stat h3 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .stat p,
+    .sub-label,
+    .small-text {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .photo-card {
+      overflow: hidden;
+      padding: 18px;
+    }
+
+    .photo-frame {
+      overflow: hidden;
+      border-radius: 28px;
+      position: relative;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 4 / 4.8;
+      transition: 0.5s ease;
+    }
+
+    .photo-card:hover img,
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .subheading {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .contact-list,
+    .skill-list,
+    .about-points,
+    .contact-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .info-box,
+    .skill-box,
+    .hobby-box,
+    .point-box,
+    .contact-box,
+    .mini-box,
+    .color-box {
+      background: rgba(255,255,255,0.8);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.05);
+      transition: 0.3s ease;
+    }
+
+    .info-box:hover,
+    .skill-box:hover,
+    .hobby-box:hover,
+    .point-box:hover,
+    .contact-box:hover,
+    .mini-box:hover,
+    .gallery-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .contact-label,
+    .mini-label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .contact-value {
+      font-weight: 700;
+      word-break: break-word;
+      line-height: 1.6;
+    }
+
+    .color-preview {
+      height: 84px;
+      border-radius: 18px;
+      margin-bottom: 12px;
+    }
+
+    .hobby-grid,
+    .gallery-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hobby-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: stretch;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(255,255,255,0.42);
+      box-shadow: var(--shadow);
+      transition: 0.3s ease;
+    }
+
+    .gallery-item.tall {
+      grid-row: span 2;
+    }
+
+    .gallery-media {
+      min-height: 280px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: 0.5s ease;
+    }
+
+    .gradient-pink {
+      background: linear-gradient(135deg, #f8dae9, #ffffff);
+    }
+
+    .gradient-blue {
+      background: linear-gradient(135deg, #b9d6f3, #ffffff);
+    }
+
+    .gradient-mix {
+      background: linear-gradient(135deg, #f6e7ef, #dcecff);
+    }
+
+    .gradient-soft {
+      background: linear-gradient(135deg, #ffffff, #f8dae9);
+    }
+
+    .gallery-caption {
+      padding: 18px 20px 20px;
+    }
+
+    .gallery-caption h4,
+    .box-title {
+      font-size: 20px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 24px;
+    }
+
+    .quote-box {
+      padding: 24px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(248, 218, 233, 0.88), rgba(185, 214, 243, 0.68));
+      box-shadow: inset 0 8px 16px rgba(255,255,255,0.25);
+    }
+
+    .quote-box h4 {
+      font-size: 24px;
+      margin-bottom: 14px;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 24px;
+      color: #5f7285;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .grid-hero,
+      .grid-2,
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page {
+        width: min(100% - 20px, 1200px);
+      }
+
+      .navbar {
+        border-radius: 28px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-menu.show {
+        display: block;
+        animation: fadeUp 0.35s ease;
+      }
+
+      .hobby-grid,
+      .gallery-grid,
+      .grid-3,
+      .grid-4,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item.tall {
+        grid-row: span 1;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .subheading {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <div class="page">
+    <header class="navbar">
+      <div class="brand">
+        <img src="/mnt/data/image.png" alt="Avatar Nguyễn Thảo Linh">
+        <div>
+          <h1>Nguyễn Thảo Linh</h1>
+          <p>Portfolio cá nhân</p>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-section="home">Trang chủ</button>
+        <button class="nav-btn" data-section="about">About me</button>
+        <button class="nav-btn" data-section="gallery">Gallery</button>
+        <button class="nav-btn" data-section="contact">Liên hệ</button>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle">☰</button>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-links">
+        <button class="nav-btn active" data-section="home">Trang chủ</button>
+        <button class="nav-btn" data-section="about">About me</button>
+        <button class="nav-btn" data-section="gallery">Gallery</button>
+        <button class="nav-btn" data-section="contact">Liên hệ</button>
+      </div>
+    </div>
+
+    <section class="section active" id="home">
+      <div class="grid-hero">
+        <div class="card hero-card">
+          <div class="badge">✨ Trang portfolio cá nhân</div>
+          <h2 class="hero-title">Xin chào, mình là <br>Nguyễn Thảo Linh</h2>
+          <p class="hero-subtitle">Học sinh THPT Bỉm Sơn</p>
+          <p class="hero-text">
+            Mình yêu thích sự nhẹ nhàng, tích cực và luôn mong muốn phát triển bản thân mỗi ngày.
+            Đây là nơi mình lưu lại những thông tin, sở thích, kỹ năng và những điều đẹp đẽ trong hành trình của mình.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-dark go-section" data-target="about">Khám phá About me</button>
+            <button class="btn btn-light go-section" data-target="gallery">Xem Gallery</button>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <h3>04</h3>
+              <p>Sở thích nổi bật</p>
+            </div>
+            <div class="stat">
+              <h3>04</h3>
+              <p>Kỹ năng chính</p>
+            </div>
+            <div class="stat">
+              <h3>100%</h3>
+              <p>Năng lượng tích cực</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card photo-card">
+            <div class="photo-frame">
+              <img src="/mnt/data/image.png" alt="Ảnh đại diện Nguyễn Thảo Linh">
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="section-title">Liên hệ nhanh</p>
+            <div class="contact-list">
+              <a class="info-box" href="https://www.facebook.com/share/194xL8VRPQ/?mibextid=wwXIfr" target="_blank">
+                <div class="contact-label">Facebook</div>
+                <div class="contact-value">facebook.com/share/194xL8VRPQ</div>
+              </a>
+              <a class="info-box" href="https://www.instagram.com/_thaolihn_/" target="_blank">
+                <div class="contact-label">Instagram</div>
+                <div class="contact-value">@_thaolihn_</div>
+              </a>
+              <a class="info-box" href="mailto:thaolinh21908@gmail.com">
+                <div class="contact-label">Gmail</div>
+                <div class="contact-value">thaolinh21908@gmail.com</div>
+              </a>
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="section-title">Màu chủ đạo</p>
+            <div class="grid-2" style="gap: 14px;">
+              <div class="color-box">
+                <div class="color-preview" style="background:#f8dae9"></div>
+                <div class="contact-value">#F8DAE9</div>
+              </div>
+              <div class="color-box">
+                <div class="color-preview" style="background:#b9d6f3"></div>
+                <div class="contact-value">#B9D6F3</div>
+              </div>
+            </div>
+            <p class="small-text" style="margin-top:14px;">Tông pastel hồng và xanh giúp tổng thể website mềm mại, nữ tính và hiện đại.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:24px;">
+        <div class="card">
+          <p class="section-title">Sở thích của mình</p>
+          <div class="hobby-grid">
+            <div class="hobby-box">
+              <h3 class="box-title">Đi du lịch</h3>
+              <p class="desc">Mình thích khám phá những nơi mới, lưu giữ kỷ niệm đẹp và trải nghiệm nhiều điều thú vị.</p>
+            </div>
+            <div class="hobby-box">
+              <h3 class="box-title">Nghe nhạc</h3>
+              <p class="desc">Âm nhạc giúp mình thư giãn, tạo cảm hứng tích cực và cân bằng cảm xúc mỗi ngày.</p>
+            </div>
+            <div class="hobby-box">
+              <h3 class="box-title">Xem phim</h3>
+              <p class="desc">Mình thích những bộ phim mang lại cảm xúc, câu chuyện đẹp và góc nhìn mới về cuộc sống.</p>
+            </div>
+            <div class="hobby-box">
+              <h3 class="box-title">Chụp ảnh</h3>
+              <p class="desc">Mình thích ghi lại khoảnh khắc đẹp, màu sắc nhẹ nhàng và cảm xúc chân thật qua từng bức ảnh.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <p class="section-title">Kỹ năng nổi bật</p>
+          <div class="skill-list">
+            <div class="skill-box">
+              <div class="contact-value">01. Giao tiếp tốt</div>
+              <p class="small-text">Mình luôn cố gắng truyền đạt rõ ràng và tạo cảm giác thoải mái với mọi người.</p>
+            </div>
+            <div class="skill-box">
+              <div class="contact-value">02. Hòa đồng</div>
+              <p class="small-text">Mình dễ dàng làm quen và kết nối với môi trường mới.</p>
+            </div>
+            <div class="skill-box">
+              <div class="contact-value">03. Biết lắng nghe</div>
+              <p class="small-text">Mình tôn trọng cảm xúc và suy nghĩ của người khác trong mọi cuộc trò chuyện.</p>
+            </div>
+            <div class="skill-box">
+              <div class="contact-value">04. Thích tìm tòi, khám phá và học hỏi điều mới</div>
+              <p class="small-text">Mình luôn muốn mở rộng hiểu biết và trải nghiệm để phát triển bản thân mỗi ngày.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="about-layout">
+        <div class="card">
+          <p class="section-title">About me</p>
+          <div class="photo-frame" style="margin-bottom:20px;">
+            <img src="/mnt/data/image.png" alt="Nguyễn Thảo Linh">
+          </div>
+          <h3 class="subheading" style="margin-bottom:6px;">Nguyễn Thảo Linh</h3>
+          <p class="hero-subtitle" style="font-size:16px; margin-bottom:16px;">Học sinh THPT Bỉm Sơn</p>
+          <p class="desc">
+            Mình là người yêu thích sự chân thành, nhẹ nhàng và luôn sẵn sàng học hỏi.
+            Mình thích kết nối với mọi người, lắng nghe những câu chuyện xung quanh và không ngừng tìm kiếm
+            những trải nghiệm mới để hoàn thiện bản thân.
+          </p>
+        </div>
+
+        <div class="grid-2" style="grid-template-columns:1fr; gap:24px;">
+          <div class="card">
+            <p class="section-title">Mình là người như thế nào?</p>
+            <div class="about-points">
+              <div class="point-box">
+                <div class="contact-value">Tự tin trong giao tiếp và dễ tạo thiện cảm với mọi người</div>
+              </div>
+              <div class="point-box">
+                <div class="contact-value">Luôn lắng nghe để thấu hiểu và chia sẻ tích cực</div>
+              </div>
+              <div class="point-box">
+                <div class="contact-value">Yêu thích khám phá, học hỏi và trải nghiệm điều mới</div>
+              </div>
+              <div class="point-box">
+                <div class="contact-value">Trân trọng những khoảnh khắc đẹp trong học tập và cuộc sống</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="section-title">Sở thích & kỹ năng</p>
+            <div class="grid-2">
+              <div>
+                <h4 class="box-title">Sở thích</h4>
+                <div class="contact-grid">
+                  <div class="mini-box">Đi du lịch</div>
+                  <div class="mini-box">Nghe nhạc</div>
+                  <div class="mini-box">Xem phim</div>
+                  <div class="mini-box">Chụp ảnh</div>
+                </div>
+              </div>
+              <div>
+                <h4 class="box-title">Kỹ năng</h4>
+                <div class="contact-grid">
+                  <div class="mini-box">Giao tiếp tốt</div>
+                  <div class="mini-box">Hòa đồng</div>
+                  <div class="mini-box">Biết lắng nghe</div>
+                  <div class="mini-box">Thích học hỏi điều mới</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="card">
+        <p class="section-title">Gallery ảnh</p>
+        <h3 class="subheading">Một góc nhỏ pastel của mình</h3>
+        <p class="desc" style="max-width:760px; margin-bottom:24px;">
+          Một góc nhỏ mang phong cách pastel nhẹ nhàng, lưu giữ những cảm xúc đẹp,
+          những sắc màu mình yêu thích và cá tính riêng của mình.
+        </p>
+
+        <div class="gallery-grid">
+          <div class="gallery-item tall">
+            <div class="gallery-media">
+              <img src="/mnt/data/image.png" alt="Chân dung Nguyễn Thảo Linh">
+            </div>
+            <div class="gallery-caption">
+              <h4>Chân dung</h4>
+              <p class="small-text">Mềm mại và tự nhiên</p>
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <div class="gallery-media gradient-pink"></div>
+            <div class="gallery-caption">
+              <h4>Pastel mood</h4>
+              <p class="small-text">Pink & blue aesthetic</p>
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <div class="gallery-media gradient-blue"></div>
+            <div class="gallery-caption">
+              <h4>Travel diary</h4>
+              <p class="small-text">Những chuyến đi đáng nhớ</p>
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <div class="gallery-media gradient-mix"></div>
+            <div class="gallery-caption">
+              <h4>Daily vibes</h4>
+              <p class="small-text">Nhẹ nhàng và tích cực</p>
+            </div>
+          </div>
+
+          <div class="gallery-item">
+            <div class="gallery-media gradient-soft"></div>
+            <div class="gallery-caption">
+              <h4>Photo moments</h4>
+              <p class="small-text">Lưu giữ khoảnh khắc đẹp</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="grid-2">
+        <div class="card">
+          <p class="section-title">Kết nối với mình</p>
+          <h3 class="subheading">Liên hệ với Thảo Linh</h3>
+          <p class="contact-text" style="margin-bottom:20px;">
+            Mình rất vui khi được làm quen, trò chuyện và kết nối với những người bạn mới.
+            Bạn có thể liên hệ với mình qua các nền tảng dưới đây.
+          </p>
+          <div class="contact-grid">
+            <a class="contact-box" href="https://www.facebook.com/share/194xL8VRPQ/?mibextid=wwXIfr" target="_blank">
+              <div class="contact-label">Facebook</div>
+              <div class="contact-value">facebook.com/share/194xL8VRPQ</div>
+            </a>
+            <a class="contact-box" href="https://www.instagram.com/_thaolihn_/" target="_blank">
+              <div class="contact-label">Instagram</div>
+              <div class="contact-value">@_thaolihn_</div>
+            </a>
+            <a class="contact-box" href="mailto:thaolinh21908@gmail.com">
+              <div class="contact-label">Gmail</div>
+              <div class="contact-value">thaolinh21908@gmail.com</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <p class="section-title">Lời nhắn nhỏ</p>
+          <div class="quote-box">
+            <h4>“Luôn nhẹ nhàng, tích cực và không ngừng phát triển bản thân.”</h4>
+            <p class="quote-text">
+              Mình tin rằng sự chân thành, lắng nghe và tinh thần học hỏi sẽ giúp mỗi người trở nên tốt hơn mỗi ngày.
+            </p>
+          </div>
+
+          <div class="grid-2" style="margin-top:18px;">
+            <div class="mini-box">
+              <div class="mini-label">Trường học</div>
+              <div class="contact-value">THPT Bỉm Sơn</div>
+            </div>
+            <div class="mini-box">
+              <div class="mini-label">Phong cách</div>
+              <div class="contact-value">Pastel, nhẹ nhàng, hiện đại</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">Designed with pastel pink #F8DAE9 & blue #B9D6F3 • Nguyễn Thảo Linh Portfolio</p>
+  </div>
+
+  <script>
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const sections = document.querySelectorAll('.section');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const goButtons = document.querySelectorAll('.go-section');
+
+    function showSection(sectionId) {
+      sections.forEach(section => {
+        section.classList.toggle('active', section.id === sectionId);
+      });
+
+      navButtons.forEach(button => {
+        button.classList.toggle('active', button.dataset.section === sectionId);
+      });
+
+      mobileMenu.classList.remove('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    navButtons.forEach(button => {
+      button.addEventListener('click', () => showSection(button.dataset.section));
+    });
+
+    goButtons.forEach(button => {
+      button.addEventListener('click', () => showSection(button.dataset.target));
+    });
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
+    });
+  </script>
+</body>
+</html>
